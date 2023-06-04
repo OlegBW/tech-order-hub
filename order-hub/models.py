@@ -27,7 +27,7 @@ class Employee(Base):
     full_name = mapped_column(TEXT, nullable = False)
     user_name = mapped_column(TEXT, unique = True, nullable = False)
     email = mapped_column(TEXT, unique = True, nullable = False)
-    hashed_password = mapped_column(TEXT, unique = True, nullable = False)
+    hashed_password = mapped_column(TEXT, nullable = False)
     user_role = mapped_column(TEXT, nullable = False)
 
     def __repr__(self):
