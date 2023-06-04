@@ -19,5 +19,6 @@ CREATE TABLE order_info(
     product_id REFERENCES product(id) ON UPDATE CASCADE ON DELETE CASCADE,
     cashier_id REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE,
     order_status TEXT,
+    order_date TIMESTAMP,
     discount REAL
 );
