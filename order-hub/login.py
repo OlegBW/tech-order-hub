@@ -15,7 +15,7 @@ login()
 
 ph = PasswordHasher()
 
-login_blueprint = Blueprint('login_blueprint',__name__, url_prefix='/auth')
+login_blueprint = Blueprint('login_blueprint', __name__, url_prefix='/auth')
 
 @login_blueprint.route('/login', methods = ['POST'])
 def login():
