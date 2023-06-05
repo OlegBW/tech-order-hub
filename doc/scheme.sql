@@ -1,6 +1,6 @@
 CREATE TABLE product(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-	name TEXT UNIQUE,
+	product_name TEXT UNIQUE,
     price REAL,
     creation_date TIMESTAMP
 );

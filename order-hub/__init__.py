@@ -14,3 +14,6 @@ app.register_blueprint(registration_blueprint)
 
 from .login import login_blueprint
 app.register_blueprint(login_blueprint)
+
+from .products import products_blueprint
+app.register_blueprint(products_blueprint)

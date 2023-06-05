@@ -13,12 +13,12 @@ print('Import model')
 class Product(Base):
     __tablename__ = 'product'
     id = mapped_column(INTEGER, primary_key = True)
-    name = mapped_column(TEXT, unique = True, nullable = False)
+    product_name = mapped_column(TEXT, unique = True, nullable = False)
     price = mapped_column(REAL, nullable = False)
     creation_date = mapped_column(TIMESTAMP, nullable = False)
 
     def __repr__(self):
-        return f'{self.__class__.__name__}({self.id, self.name, self.price, self.creation_date})'
+        return f'{self.__class__.__name__}({self.id, self.product_name, self.price, self.creation_date})'
 
 
 class Employee(Base):
