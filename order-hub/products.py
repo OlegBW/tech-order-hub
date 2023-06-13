@@ -64,6 +64,11 @@ def products_CR():
         price = escape(price)
         creation_date = escape(creation_date)
 
+        try:
+            price = float(price)
+        except Exception:
+            return jsonify({"status": "wrong price"})
+
         date_format = "%Y-%m-%d %H:%M"
         try:
             creation_date = datetime.datetime.strptime(creation_date, date_format)
@@ -115,9 +120,15 @@ def products_RUD(id):
         if not (product_name is None):
             product_name = escape(product_name)
             product_data.product_name = product_name
+
         if not (price is None):
             price = escape(price)
+            try:
+                price = float(price)
+            except Exception:
+                return jsonify({"status": "wrong price"})
             product_data.price = price
+
         if not (creation_date is None):
             creation_date = escape(creation_date)
             date_format = "%Y-%m-%d %H:%M"

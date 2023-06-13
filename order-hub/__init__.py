@@ -20,3 +20,6 @@ app.register_blueprint(products_blueprint)
 
 from .orders import orders_blueprint
 app.register_blueprint(orders_blueprint)
+
+from .invoices import invoices_blueprint
+app.register_blueprint(invoices_blueprint)

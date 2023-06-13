@@ -41,8 +41,8 @@ class Employee(Base):
 class OrderInfo(Base):
     __tablename__ = 'order_info'
     id = mapped_column(INTEGER, primary_key = True)
-    product_id = mapped_column(ForeignKey('product.id', ondelete = 'CASCADE', onupdate = 'CASCADE'))
-    cashier_id = mapped_column(ForeignKey('employee.id', ondelete = 'CASCADE', onupdate = 'CASCADE'))
+    product_id = mapped_column(ForeignKey('product.id', ondelete = 'CASCADE', onupdate = 'CASCADE'), nullable = False)
+    cashier_id = mapped_column(ForeignKey('employee.id', ondelete = 'CASCADE', onupdate = 'CASCADE'), nullable = False)
     order_status = mapped_column(TEXT, nullable = False)
     order_date = mapped_column(TIMESTAMP, nullable = False)
     discount = mapped_column(REAL, nullable = False)

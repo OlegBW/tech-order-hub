@@ -22,6 +22,20 @@ def orders_CR():
         page = request.args.get('page')
         limit = request.args.get('limit')
 
+        start_date = request.args.get('start_date')
+        end_date = request.args.get('end_date')
+
+        if not (page is None or limit is None or start_date is None or end_date is None):
+            date_format = "%Y-%m-%d %H:%M"
+            try:
+                start_date = datetime.datetime.strptime(start_date, date_format)
+                end_date = datetime.datetime.strptime(end_date, date_format)
+                page = int(page)
+                limit = int(limit)
+            except Exception:
+                return jsonify({"status": "Incorrect parameters"})
+            orders_data = db_session.query(OrderInfo).filter(OrderInfo.order_date.between(start_date, end_date)).limit(limit = limit).offset(offset = page * limit).all()
+
         if not (page is None or limit is None):
             try:
                 page = int(page)
@@ -29,6 +43,16 @@ def orders_CR():
             except Exception:
                 abort(400)
             orders_data = db_session.query(OrderInfo).limit(limit = limit).offset(offset = page * limit).all()
+
+        elif not (start_date is None or end_date is None):
+            date_format = "%Y-%m-%d %H:%M"
+            try:
+                start_date = datetime.datetime.strptime(start_date, date_format)
+                end_date = datetime.datetime.strptime(end_date, date_format)
+            except Exception:
+                return jsonify({"status": "wrong date format, YYYY-MM-DD HH:MM required"})
+            orders_data = db_session.query(OrderInfo).filter(OrderInfo.order_date.between(start_date, end_date)).all()
+
         else:
             orders_data = db_session.query(OrderInfo).all()
 
@@ -56,9 +80,10 @@ def orders_CR():
 
         product_id = request.form.get('product_id')
         order_status = request.form.get('order_status')
-        order_date = request.form.get('order_date')
-        discount = request.form.get('discount')
+        discount = request.form.get('discount', 0)
         quantity = request.form.get('quantity')
+
+        order_date = datetime.datetime.now()
 
         if product_id is None:
             abort(400)
@@ -66,26 +91,28 @@ def orders_CR():
         if order_status is None:
             abort(400)
 
-        if order_date is None:
-            abort(400)
-
-        if discount is None:
-            abort(400)
-
         if quantity is None:
             abort(400)
 
         product_id = escape(product_id)
         order_status = escape(order_status)
-        order_date = escape(order_date)
         discount = escape(discount)
         quantity = escape(quantity)
 
-        date_format = "%Y-%m-%d %H:%M"
         try:
-            order_date = datetime.datetime.strptime(order_date, date_format)
+            product_id = int(product_id)
         except Exception:
-            return jsonify({"status": "wrong date format, YYYY-MM-DD HH:MM required"})
+            return jsonify({"status": "wrong product_id"})
+
+        try:
+            discount = float(discount)
+        except Exception:
+            return jsonify({"status": "wrong discount"})
+
+        try:
+            quantity = int(quantity)
+        except Exception:
+            return jsonify({"status": "wrong quantity"})
 
         product = db_session.query(Product).get(product_id)
         if product is None:
@@ -107,6 +134,8 @@ def orders_CR():
 
         if is_exists:
             abort(400)
+        if discount == 0 and (order_date - product.creation_date).days >= 31:
+            discount = 20
 
         new_order = OrderInfo(
             product_id = product_id, 
@@ -160,12 +189,20 @@ def orders_RUD(id):
         
         if not (product_id is None):
             product_id = escape(product_id)
+            try:
+                product_id = int(product_id)
+            except Exception:
+                return jsonify({"status": "wrong product_id"})
             product = db_session.query(Product).get(product_id)
             if not (product is None):
                 order_data.product_id = product_id
 
         if not (cashier_id is None):
             cashier_id = escape(cashier_id)
+            try:
+                cashier_id = int(cashier_id)
+            except Exception:
+                return jsonify({"status": "wrong cashier_id"})
             cashier = db_session.query(Employee).get(cashier_id)
             if not (cashier is None):
                 order_data.cashier_id = cashier_id
@@ -187,10 +224,18 @@ def orders_RUD(id):
 
         if not (discount is None):
             discount = escape(discount)
+            try:
+                discount = float(discount)
+            except Exception:
+                return jsonify({"status": "wrong discount"})
             order_data.discount = discount
 
         if not (quantity is None):
             quantity = escape(quantity)
+            try:
+                quantity = int(quantity)
+            except Exception:
+                return jsonify({"status": "wrong quantity"})
             order_data.quantity = quantity
 
         db_session.commit()
