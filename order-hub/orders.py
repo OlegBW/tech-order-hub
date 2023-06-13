@@ -9,6 +9,9 @@ import datetime
 Implements the functionality of CRUD operations for orders
 
 Functions:
+
+orders_CR()
+orders_RUD(id)
 '''
 
 orders_blueprint = Blueprint('orders_blueprint', __name__)
@@ -16,6 +19,8 @@ orders_blueprint = Blueprint('orders_blueprint', __name__)
 @orders_blueprint.route('/orders', methods = ['GET', 'POST'])
 @jwt_required()
 def orders_CR():
+    'Performs operations to receive and add order data (C - create, R - read)'
+
     if request.method == 'GET':
         orders_data = None
 
@@ -154,6 +159,8 @@ def orders_CR():
 @orders_blueprint.route('/orders/<int:id>', methods = ['GET', 'PUT', 'DELETE'])
 @jwt_required()
 def orders_RUD(id):
+    'Implements the functionality of processing a specific order (R - read, U - update, D - delete)'
+
     if request.method == 'GET':
         order_data = db_session.query(OrderInfo).get(id)
         if order_data is None:

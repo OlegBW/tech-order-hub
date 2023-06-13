@@ -7,6 +7,7 @@ from .models import Employee
 '''
 Implementation of registration functionality using Argon2 hashing
 
+registration()
 '''
 
 ph = PasswordHasher()

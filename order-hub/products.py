@@ -10,8 +10,8 @@ Implements the functionality of CRUD operations for products
 
 Functions:
 
-products_CR - Performs operations to receive and add product data (C - create, R - read)
-products_RUD - Implements the functionality of processing a specific product (R - read, U - update, D - delete)
+products_CR()
+products_RUD(id)
 '''
 
 products_blueprint = Blueprint('products_blueprint', __name__)
@@ -19,6 +19,8 @@ products_blueprint = Blueprint('products_blueprint', __name__)
 @products_blueprint.route('/products', methods = ['GET', 'POST'])
 @jwt_required()
 def products_CR():
+    'Performs operations to receive and add product data (C - create, R - read)'
+
     if request.method == 'GET':
         products_data = None
 
@@ -91,6 +93,8 @@ def products_CR():
 @products_blueprint.route('/products/<int:id>', methods = ['GET', 'PUT', 'DELETE'])
 @jwt_required()
 def products_RUD(id):
+    'Implements the functionality of processing a specific product (R - read, U - update, D - delete)'
+
     if request.method == 'GET':
         product_data = db_session.query(Product).get(id)
         if product_data is None:

@@ -10,6 +10,7 @@ Implements the functionality of generating invoice data
 
 Functions:
 
+invoice_generator(id)
 '''
 
 invoices_blueprint = Blueprint('invoices_blueprint', __name__)
@@ -17,7 +18,8 @@ invoices_blueprint = Blueprint('invoices_blueprint', __name__)
 @invoices_blueprint.route('/invoices/<int:id>', methods = ['GET'])
 @jwt_required()
 def invoice_generator(id):
-    # ToDo
+    'Generates JSON with invoice data'
+
     order_data = db_session.query(OrderInfo).get(id)
     if order_data is None:
         abort(400)
