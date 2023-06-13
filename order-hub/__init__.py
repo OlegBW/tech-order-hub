@@ -17,3 +17,6 @@ app.register_blueprint(login_blueprint)
 
 from .products import products_blueprint
 app.register_blueprint(products_blueprint)
+
+from .orders import orders_blueprint
+app.register_blueprint(orders_blueprint)

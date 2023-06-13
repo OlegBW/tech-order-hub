@@ -38,6 +38,7 @@ def products_CR():
         response = []
         for product in products_data:
             response.append({
+                'id': product.id,
                 'product_name': product.product_name,
                 'price': product.price,
                 'creation_date': product.creation_date
@@ -63,11 +64,11 @@ def products_CR():
         price = escape(price)
         creation_date = escape(creation_date)
 
-        date_format = "%Y-%m-%d"
+        date_format = "%Y-%m-%d %H:%M"
         try:
             creation_date = datetime.datetime.strptime(creation_date, date_format)
         except Exception:
-            return jsonify({"status": "wrong date format"})
+            return jsonify({"status": "wrong date format, YYYY-MM-DD HH:MM required"})
 
         criteria = db_session.query(Product).filter_by(product_name = product_name, price = price, creation_date = creation_date).exists()
         is_exists = db_session.query(criteria).scalar()
@@ -91,6 +92,7 @@ def products_RUD(id):
             abort(400)
 
         response = {
+            'id': product_data.id,
             'product_name': product_data.product_name,
             'price': product_data.price,
             'creation_date': product_data.creation_date
@@ -118,6 +120,12 @@ def products_RUD(id):
             product_data.price = price
         if not (creation_date is None):
             creation_date = escape(creation_date)
+            date_format = "%Y-%m-%d %H:%M"
+            try:
+                creation_date = datetime.datetime.strptime(creation_date, date_format)
+            except Exception:
+                return jsonify({"status": "wrong date format, YYYY-MM-DD HH:MM required"})
+            
             product_data.creation_date = creation_date
         
         db_session.commit()
