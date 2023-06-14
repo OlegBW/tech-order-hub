@@ -5,7 +5,6 @@ from .database import init_app
 
 app = Flask(__name__)
 app.config.from_pyfile('development.cfg', silent=True)
-print(app.config)
 init_app(app)
 jwt = JWTManager(app)
 
