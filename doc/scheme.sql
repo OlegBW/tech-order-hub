@@ -20,5 +20,6 @@ CREATE TABLE order_info(
     cashier_id REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE,
     order_status TEXT,
     order_date TIMESTAMP,
-    discount REAL
+    discount REAL,
+    quantity INTEGER
 );
