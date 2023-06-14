@@ -79,7 +79,7 @@ def orders_CR():
     elif request.method == 'POST':
         user_data = get_jwt_identity()
         if user_data.get('role') != 'cashier':
-            abort(400)
+            abort(403)
 
         cashier_id = user_data.get('user_id')
 
@@ -178,6 +178,10 @@ def orders_RUD(id):
         return jsonify(response)
     
     elif request.method == 'PUT':
+        user_data = get_jwt_identity()
+        if user_data.get('role') not in ['sales assistant', 'cashier']:
+            abort(403)
+
         product_id = request.form.get('product_id')
         cashier_id = request.form.get('cashier_id')
         order_status = request.form.get('order_status')
