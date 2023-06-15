@@ -104,7 +104,7 @@
 >    * status code: `401 Unauthorized`
 >    * status code: `400 Bad Request`
 
-### **Endpoint to update product data:**.
+### **Endpoint to update product data:**
 >* Method: `PUT`.
 >* URL: `/products/{id}`
 >* Request parameters: 
@@ -143,7 +143,7 @@
 >    * status code: `400 Bad Request`
 
 ## Invoice
-### **Endpoint for invoice generation:**.
+### **Endpoint for invoice generation:**
 >* Method: `GET`.
 >* URL: `/invoices/{order_id}`
 >* Parameters of the request: 
@@ -162,6 +162,134 @@
 >    "product_name": "Raspberry Pi Pico",
 >    "quantity": 2,
 >    "total": 20.0
+>}
+>```
+>* Errors:
+>    * status code: `401 Unauthorized`
+>    * status code: `400 Bad Request`
+
+## Orders
+**Endpoint to create an order:**
+>* Method: `POST`.
+>* URL: `/orders`
+>* Parameters of the request: 
+>    * `product_id`
+>    * `order_status` 
+>    * `discount` (optional)
+>    * `quantity`
+>* Response:
+>    * status code: `200 OK`
+>```json
+>{
+>    "status":"success"
+>}
+>```
+>* Errors:
+>    * status code: `403 Forbidden`
+>    * status code: `401 Unauthorized`
+>    * status code: `400 Bad Request`
+
+**Endpoint to retrieve all order data:**
+>* Method: `GET`.
+>* URL: `/orders`
+>* Parameters of the request: 
+>    * `page` (optional) - Results page
+>    * `limit` (optional) - Maximum number of records per page
+>    * `start_date` (optional) - Lower time limit of the sample range
+>    * `end_date` (optional) - Upper time limit of the sample range
+>* Response:
+>    * status code: `200 OK`
+>```json
+>[
+>    {
+>        "cashier_id": 1,
+>        "discount": 20.0,
+>        "id": 1,
+>        "order_date": "Thu, 15 Jun 2023 10:05:30 GMT",
+>        "order_status": "pending",
+>        "product_id": 1,
+>        "quantity": 2
+>    },
+>    {
+>        "cashier_id": 1,
+>        "discount": 20.0,
+>        "id": 2,
+>        "order_date": "Thu, 15 Jun 2023 10:05:37 GMT",
+>        "order_status": "pending",
+>        "product_id": 2,
+>        "quantity": 2
+>    },
+>    {
+>        "cashier_id": 1,
+>        "discount": 20.0,
+>        "id": 3,
+>        "order_date": "Thu, 15 Jun 2023 10:05:41 GMT",
+>        "order_status": "pending",
+>        "product_id": 3,
+>        "quantity": 2
+>    }
+>]
+>```
+>* Errors:
+>    * status code: `401 Unauthorized`
+>    * status code: `400 Bad Request`
+
+**Endpoint to delete an order:**
+>* Method: `DELETE`.
+>* URL: `/orders/{id}`
+>* Parameters of the request:
+>    * `id` - Order ID
+>* Response:
+>    * status code: `200 OK`
+>```json
+>{
+>    "status":"success"
+>}
+>```
+>* Errors:
+>    * status code: `401 Unauthorized`
+>    * status code: `400 Bad Request`
+
+## Orders
+**Endpoint for updating order data:**
+>* Method: `PUT`.
+>* URL: `/orders/{id}`
+>* Parameters of the request: 
+>    * `id` - Order ID
+>    * `product_id` (optional)
+>    * `cashier_id` (optional)
+>    * `order_date` (optional)
+>    * `order_status` (optional)
+>    * `discount` (optional)
+>    * `quantity` (optional)
+>* Response:
+>    * status code: `200 OK`
+>```json
+>{
+>    "status":"success"
+>}
+>```
+>* Errors:
+>    * status code: `403 Forbidden`
+>    * status code: `401 Unauthorized`
+>    * status code: `400 Bad Request`
+
+**Endpoint for receiving order data by id:**
+>* Method: `GET`.
+>* URL: `/orders/{id}`
+>* Parameters of the request: 
+>    * `id` - Order ID
+>* Response:
+>    * status code: `200 OK`
+>```json
+>{
+>    "cashier_id": 1,
+>    "discount": 20.0,
+>    "id": 1,
+>    "order_date": "Thu, 15 Jun 2023 10:05:30 GMT",
+>    "order_status": "pending",
+>    "product_id": 1,
+>    "quantity": 2
 >}
 >```
 >* Errors:
