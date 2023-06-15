@@ -7,11 +7,11 @@
 >* Method: `POST`.
 >* URL: `/register`
 >* Parameters of the request:
->	* `name` 
->	* `login`
->	* `email`
->	* `password`
->	* `role`
+>	* `full_name`: string - full name of employee
+>	* `user_name`: string - employee login in the system
+>	* `email`: string
+>	* `password`: string
+>	* `role`: string - The role of the employee in the system
 >* Response:
 >	* Successful status: `201 Created`
 >```json
@@ -26,8 +26,8 @@
 >* Method: `POST`.
 >* URL: `/login`
 >* Parameters of the request:
->	* `e-mail`
->	* `password`
+>	* `user_name`: string - employee login in the system
+>	* `password`: string
 >* Response:
 >	* Successful status: `200 OK`
 >```json
@@ -43,9 +43,9 @@
 >* Method: `POST`.
 >* URL: `/products`
 >* Request parameters: 
->    * `product_name` 
->    * `price`
->    * `creation_date`
+>    * `product_name`: string
+>    * `price`: float
+>    * `creation_date`: a string of the format YYYY-MM-DD HH:MM
 >* Request Headers
 >    * `Authorization` - User authorization token.
 >* Response: 
@@ -63,8 +63,10 @@
 >* Method: `GET`.
 >* URL: `/products/`
 >* Request parameters:
->    * `page` (optional) - Results page
->    * `limit` (optional) - Maximum number of records per page
+>    * `page`: int (optional) - Results page
+>    * `limit`: int (optional) - Maximum number of records per page
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response: 
 >    * status code: `200 OK`
 >```json
@@ -92,7 +94,9 @@
 >* Method: `DELETE`.
 >* URL: `/products/{id}`
 >* Request parameters: 
->    * `id` - Product ID
+>    * `id`: int - Product ID
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response:
 >    * status code: `200 OK`
 >```json
@@ -108,10 +112,12 @@
 >* Method: `PUT`.
 >* URL: `/products/{id}`
 >* Request parameters: 
->    * `id` - Product ID
->    * `product_name` (optional) 
->    * `price` (optional)
->    * `creation_date` (optional)
+>    * `id`: int - Product ID
+>    * `product_name`: string (optional) 
+>    * `price`: float (optional)
+>    * `creation_date`: string (optional) - a string of the format YYYY-MM-DD HH:MM
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response: 
 >    * status code: `200 OK`
 >```json
@@ -127,7 +133,9 @@
 >* Method: `GET`.
 >* URL: `/products/{id}`
 >* Request parameters: 
->    * `id` - Product ID
+>    * `id`: int - Product ID
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response: 
 >    * status code: `200 OK`
 >```json
@@ -147,7 +155,9 @@
 >* Method: `GET`.
 >* URL: `/invoices/{order_id}`
 >* Parameters of the request: 
->    * `id` - Order ID
+>    * `id`: int - Order ID
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response: 
 >    * status code: `200 OK`
 >```json
@@ -173,10 +183,12 @@
 >* Method: `POST`.
 >* URL: `/orders`
 >* Parameters of the request: 
->    * `product_id`
->    * `order_status` 
->    * `discount` (optional)
->    * `quantity`
+>    * `product_id`: int
+>    * `order_status`: string 
+>    * `discount`:float (optional)
+>    * `quantity`: int
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response:
 >    * status code: `200 OK`
 >```json
@@ -193,10 +205,12 @@
 >* Method: `GET`.
 >* URL: `/orders`
 >* Parameters of the request: 
->    * `page` (optional) - Results page
->    * `limit` (optional) - Maximum number of records per page
->    * `start_date` (optional) - Lower time limit of the sample range
->    * `end_date` (optional) - Upper time limit of the sample range
+>    * `page`: int (optional) - Results page
+>    * `limit`: int (optional) - Maximum number of records per page
+>    * `start_date`: string (optional) - Lower time limit of the sample range, format YYYY-MM-DD HH:MM
+>    * `end_date`: string (optional) - Upper time limit of the sample range, format YYYY-MM-DD HH:MM
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response:
 >    * status code: `200 OK`
 >```json
@@ -238,7 +252,9 @@
 >* Method: `DELETE`.
 >* URL: `/orders/{id}`
 >* Parameters of the request:
->    * `id` - Order ID
+>    * `id`: int - Order ID
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response:
 >    * status code: `200 OK`
 >```json
@@ -255,13 +271,15 @@
 >* Method: `PUT`.
 >* URL: `/orders/{id}`
 >* Parameters of the request: 
->    * `id` - Order ID
->    * `product_id` (optional)
->    * `cashier_id` (optional)
->    * `order_date` (optional)
->    * `order_status` (optional)
->    * `discount` (optional)
->    * `quantity` (optional)
+>    * `id`: int - Order ID
+>    * `product_id`: int (optional)
+>    * `cashier_id`: int (optional)
+>    * `order_date`: string (optional) - date in the format YYYY-MM-DD HH:MM
+>    * `order_status`: string (optional)
+>    * `discount`: float (optional)
+>    * `quantity`: int (optional)
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response:
 >    * status code: `200 OK`
 >```json
@@ -278,7 +296,9 @@
 >* Method: `GET`.
 >* URL: `/orders/{id}`
 >* Parameters of the request: 
->    * `id` - Order ID
+>    * `id`: int - Order ID
+>* Request Headers
+>    * `Authorization` - User authorization token.
 >* Response:
 >    * status code: `200 OK`
 >```json
