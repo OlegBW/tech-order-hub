@@ -40,7 +40,7 @@ def invoice_generator(id):
         "quantity": order_data.quantity,
         "discount": order_data.discount,
         "order_date": order_data.order_date,
-        "total": (product_data.price * order_data.quantity) - (product_data.price * order_data.quantity * (order_data.discount / 100)),
+        "total": round((product_data.price * order_data.quantity) - (product_data.price * order_data.quantity * (order_data.discount / 100)), 2),
         "cashier_id": order_data.cashier_id,
         "cashier_full_name": employee_data.full_name,
     }
