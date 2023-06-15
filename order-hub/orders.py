@@ -89,7 +89,6 @@ def orders_CR():
         quantity = request.form.get('quantity')
 
         order_date = datetime.datetime.now()
-
         if product_id is None:
             abort(400)
 
@@ -123,7 +122,7 @@ def orders_CR():
         if product is None:
             abort(400)
 
-        cashier = db_session.query(Product).get(cashier_id)
+        cashier = db_session.query(Employee).get(cashier_id)
         if cashier is None:
             abort(400)
 
