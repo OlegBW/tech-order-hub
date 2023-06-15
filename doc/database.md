@@ -1,10 +1,9 @@
 # Database structure
 [Main page](../README.md)
 
-![db.svg](./images/db.svg)
+![db.svg](./images/db.png)
 
 ## Products
----
 |product_id|name|price|creation_date|
 |---|---|---|---|
 |1|Laptop|1000|2023-05-30|
@@ -12,7 +11,6 @@
 |3|TV|1500|2023-05-28|
 
 ## Employees
----
 |employee_id|name|role|email|password|
 |---|---|---|---|---|
 |1|John Doe|cashier|[johndoe@example.com](mailto:johndoe@example.com)|hashed_password|
@@ -20,7 +18,6 @@
 |3|David Johnson|accountant|[davidjohnson@example.com](mailto:davidjohnson@example.com)|hashed_password|
 
 ## Orders
----
 | id  | product_id | cashier_id | order_status | order_date          | discount | quantity |
 | --- | ---------- | ---------- | ------------ | ------------------- | -------- | -------- |
 | 1   | 100        | 500        | "completed"  | 2023-06-14 10:23:45 | 0.1      | 2        |

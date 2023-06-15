@@ -3,7 +3,6 @@
 [Main page](../README.md)
 
 ## Auth 
----
 ### **Endpoint for user registration:**
 >* Method: `POST`.
 >* URL: `/register`
@@ -40,7 +39,6 @@
 >    * status code: `400 Bad Request`
 
 ## Products
----
 ### **Endpoint for adding a product:**
 >* Method: `POST`.
 >* URL: `/products`
@@ -145,7 +143,6 @@
 >    * status code: `400 Bad Request`
 
 ## Invoice
----
 ### **Endpoint for invoice generation:**.
 >* Method: `GET`.
 >* URL: `/invoices/{order_id}`
