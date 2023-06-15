@@ -64,4 +64,4 @@ def registration():
         db_session.add(new_employee)
         db_session.commit()
 
-    return jsonify({"status": "success"})
+    return jsonify({"status": "success"}), 201

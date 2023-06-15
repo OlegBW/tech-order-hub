@@ -189,6 +189,8 @@
 >    * `quantity`: int
 >* Request Headers
 >    * `Authorization` - User authorization token.
+>* Roles:
+>   * cashier
 >* Response:
 >    * status code: `200 OK`
 >```json
@@ -280,6 +282,9 @@
 >    * `quantity`: int (optional)
 >* Request Headers
 >    * `Authorization` - User authorization token.
+>* Roles:
+>   * sales assistant
+>   * cashier
 >* Response:
 >    * status code: `200 OK`
 >```json
