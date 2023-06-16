@@ -54,3 +54,5 @@ Use the `--add-fixtures` flag to add product fixtures
 [Database structure](./doc/database.md)
 
 [Endpoints](./doc/endpoints.md)
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/27788164-f869e23f-cfed-4aca-97fc-fad639b28431?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D27788164-f869e23f-cfed-4aca-97fc-fad639b28431%26entityType%3Dcollection%26workspaceId%3De5f8c7f4-ce4c-48cf-9709-68c6104c55bb)
