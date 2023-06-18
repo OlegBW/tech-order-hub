@@ -1,7 +1,5 @@
 from sqlalchemy import TEXT, REAL, INTEGER, TIMESTAMP, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from typing import List
-from typing import Optional
+from sqlalchemy.orm import mapped_column, relationship
 from .database import Base
 
 '''

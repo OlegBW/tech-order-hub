@@ -1,9 +1,7 @@
-from flask import Blueprint, abort, request, jsonify
-from markupsafe import escape
+from flask import Blueprint, abort, jsonify
 from .database import db_session
-from .models import Product, OrderInfo, Employee
+from .models import OrderInfo
 from flask_jwt_extended import jwt_required
-import datetime
 
 '''
 Implements the functionality of generating invoice data 

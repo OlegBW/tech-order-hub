@@ -1,12 +1,13 @@
 from flask import Flask
-from markupsafe import escape
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from .database import init_app
 
 app = Flask(__name__)
 app.config.from_pyfile('development.cfg', silent=True)
-init_app(app)
 jwt = JWTManager(app)
+CORS(app)
+init_app(app)
 
 from .registration import registration_blueprint
 app.register_blueprint(registration_blueprint)
