@@ -16,7 +16,7 @@ orders_RUD(id)
 
 orders_blueprint = Blueprint('orders_blueprint', __name__)
 
-@orders_blueprint.route('/orders', methods = ['GET', 'POST'])
+@orders_blueprint.route('/orders', methods=['GET', 'POST'])
 @jwt_required()
 def orders_CR():
     'Performs operations to receive and add order data (C - create, R - read)'
@@ -39,7 +39,13 @@ def orders_CR():
                 limit = int(limit)
             except Exception:
                 return jsonify({"status": "Incorrect parameters"})
-            orders_data = db_session.query(OrderInfo).filter(OrderInfo.order_date.between(start_date, end_date)).limit(limit = limit).offset(offset = page * limit).all()
+            orders_data = (
+                db_session.query(OrderInfo)
+                .filter(OrderInfo.order_date.between(start_date, end_date))
+                .limit(limit=limit)
+                .offset(offset=page * limit)
+                .all()
+            )
 
         if not (page is None or limit is None):
             try:
@@ -47,7 +53,12 @@ def orders_CR():
                 limit = int(limit)
             except Exception:
                 abort(400)
-            orders_data = db_session.query(OrderInfo).limit(limit = limit).offset(offset = page * limit).all()
+            orders_data = (
+                db_session.query(OrderInfo)
+                .limit(limit=limit)
+                .offset(offset=page * limit)
+                .all()
+            )
 
         elif not (start_date is None or end_date is None):
             date_format = "%Y-%m-%d %H:%M"
@@ -56,7 +67,11 @@ def orders_CR():
                 end_date = datetime.datetime.strptime(end_date, date_format)
             except Exception:
                 return jsonify({"status": "wrong date format, YYYY-MM-DD HH:MM required"})
-            orders_data = db_session.query(OrderInfo).filter(OrderInfo.order_date.between(start_date, end_date)).all()
+            orders_data = (
+                db_session.query(OrderInfo)
+                .filter(OrderInfo.order_date.between(start_date, end_date))
+                .all()
+            )
 
         else:
             orders_data = db_session.query(OrderInfo).all()

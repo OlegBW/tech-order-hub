@@ -29,7 +29,7 @@ db_session = scoped_session(
 Base = declarative_base()
 Base.query = db_session.query_property()
 
-def init_db(add_fixtures = False):
+def init_db(add_fixtures=False):
     'initializes the database using the imported models'
 
     from . import models
@@ -47,7 +47,7 @@ def shutdown_session(exception=None):
     db_session.remove()
 
 @click.command('init-db')
-@click.option('--add-fixtures', is_flag = True, help='Loads the initial data')
+@click.option('--add-fixtures', is_flag=True, help='Loads the initial data')
 def cli_init_db(add_fixtures):
     'Initializes the database when using the init-db console command'
 

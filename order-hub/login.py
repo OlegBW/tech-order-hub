@@ -17,7 +17,7 @@ ph = PasswordHasher()
 
 login_blueprint = Blueprint('login_blueprint', __name__, url_prefix='/auth')
 
-@login_blueprint.route('/login', methods = ['POST'])
+@login_blueprint.route('/login', methods=['POST'])
 def login():
     '"/auth/login" request handler'
 
@@ -33,7 +33,7 @@ def login():
     user_name = escape(user_name)
     password = escape(password)
 
-    user_data = db_session.query(Employee).filter_by(user_name = user_name).first()
+    user_data = db_session.query(Employee).filter_by(user_name=user_name).first()
 
     if not user_data:
         abort(401)
@@ -43,5 +43,8 @@ def login():
     if not is_valid:
         abort(401)
 
-    access_token = create_access_token(identity = {'user_id': user_data.id, 'role': user_data.user_role})
-    return jsonify(access_token = access_token)
+    access_token = create_access_token(identity={
+        'user_id': user_data.id, 
+        'role': user_data.user_role
+    })
+    return jsonify(access_token=access_token)

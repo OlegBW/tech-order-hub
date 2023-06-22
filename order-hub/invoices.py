@@ -13,7 +13,7 @@ invoice_generator(id)
 
 invoices_blueprint = Blueprint('invoices_blueprint', __name__)
 
-@invoices_blueprint.route('/invoices/<int:id>', methods = ['GET'])
+@invoices_blueprint.route('/invoices/<int:id>', methods=['GET'])
 @jwt_required()
 def invoice_generator(id):
     'Generates JSON with invoice data'
@@ -30,6 +30,9 @@ def invoice_generator(id):
     if employee_data is None:
         abort(400)
 
+    total_price = product_data.price * order_data.quantity
+    total_discount = product_data.price * order_data.quantity * (order_data.discount / 100)
+
     invoice_data = {
         "order_id": order_data.id,
         "product_id": order_data.product_id,
@@ -38,7 +41,7 @@ def invoice_generator(id):
         "quantity": order_data.quantity,
         "discount": order_data.discount,
         "order_date": order_data.order_date,
-        "total": round((product_data.price * order_data.quantity) - (product_data.price * order_data.quantity * (order_data.discount / 100)), 2),
+        "total": round(total_price - total_discount, 2),
         "cashier_id": order_data.cashier_id,
         "cashier_full_name": employee_data.full_name,
     }
