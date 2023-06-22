@@ -20,7 +20,7 @@ def invoice_generator(id):
 
     order_data = db_session.query(OrderInfo).get(id)
     if order_data is None:
-        abort(400)
+        abort(404)
     
     product_data = order_data.product
     if product_data is None:

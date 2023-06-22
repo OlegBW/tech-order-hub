@@ -37,6 +37,7 @@
 >```
 >* Errors:
 >    * status code: `400 Bad Request`
+>    * status code: `401 Unauthorized`
 
 ## Products
 ### **Endpoint for adding a product:**
@@ -106,7 +107,7 @@
 >```
 >* Errors:
 >    * status code: `401 Unauthorized`
->    * status code: `400 Bad Request`
+>    * status code: `404 Not Found`
 
 ### **Endpoint to update product data:**
 >* Method: `PUT`.
@@ -127,7 +128,7 @@
 >```
 >* Errors:
 >    * status code: `401 Unauthorized`
->    * status code: `400 Bad Request`
+>    * status code: `404 Not Found`
 
 ### **Endpoint to retrieve product data (by id):**
 >* Method: `GET`.
@@ -148,7 +149,7 @@
 >```
 >* Errors:
 >    * status code: `401 Unauthorized`
->    * status code: `400 Bad Request`
+>    * status code: `404 Not Found`
 
 ## Invoice
 ### **Endpoint for invoice generation:**
@@ -177,6 +178,7 @@
 >* Errors:
 >    * status code: `401 Unauthorized`
 >    * status code: `400 Bad Request`
+>    * status code: `404 Not Found`
 
 ## Orders
 **Endpoint to create an order:**
@@ -266,7 +268,7 @@
 >```
 >* Errors:
 >    * status code: `401 Unauthorized`
->    * status code: `400 Bad Request`
+>    * status code: `404 Not Found`
 
 ## Orders
 **Endpoint for updating order data:**
@@ -295,7 +297,7 @@
 >* Errors:
 >    * status code: `403 Forbidden`
 >    * status code: `401 Unauthorized`
->    * status code: `400 Bad Request`
+>    * status code: `404 Not Found`
 
 **Endpoint for receiving order data by id:**
 >* Method: `GET`.
@@ -319,4 +321,4 @@
 >```
 >* Errors:
 >    * status code: `401 Unauthorized`
->    * status code: `400 Bad Request`
+>    * status code: `404 Not Found`

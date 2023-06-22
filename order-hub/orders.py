@@ -178,7 +178,7 @@ def orders_RUD(id):
     if request.method == 'GET':
         order_data = db_session.query(OrderInfo).get(id)
         if order_data is None:
-            abort(400)
+            abort(404)
 
         response = {
             'id': order_data.id,
@@ -205,7 +205,7 @@ def orders_RUD(id):
 
         order_data = db_session.query(OrderInfo).get(id)
         if order_data is None:
-            abort(400)
+            abort(404)
 
         fields_arr = [product_id, cashier_id, order_status, order_date, discount, quantity]
         is_valid = bool(len([field for field in fields_arr if not (field is None)]))
@@ -269,7 +269,7 @@ def orders_RUD(id):
     elif request.method == 'DELETE':
         order_data = db_session.query(OrderInfo).get(id)
         if order_data is None:
-            abort(400)
+            abort(404)
 
         db_session.delete(order_data)
         db_session.commit()
