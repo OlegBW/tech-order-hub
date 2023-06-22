@@ -36,12 +36,12 @@ def login():
     user_data = db_session.query(Employee).filter_by(user_name = user_name).first()
 
     if not user_data:
-        abort(400)
+        abort(401)
 
     is_valid = ph.verify(user_data.hashed_password, password)
 
     if not is_valid:
-        abort(400)
+        abort(401)
 
     access_token = create_access_token(identity = {'user_id': user_data.id, 'role': user_data.user_role})
     return jsonify(access_token = access_token)
